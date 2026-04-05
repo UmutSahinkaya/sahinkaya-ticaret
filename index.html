@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Şahinkaya Ticaret | Yapı Malzemeleri & İnşaat Tedarik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Three.js ve GSAP CDN üzerinden yükleniyor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigasyon -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-hex">⬡</span>
+        <span>ŞAHİN<span class="accent">KAYA</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hizmetler">Hizmetler</a></li>
+        <li><a href="#urunler">Ürünler</a></li>
+        <li><a href="#referanslar">Referanslar</a></li>
+        <li><a href="#iletisim" class="nav-cta">Teklif Al</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Bölümü — Three.js canvas arkaplan -->
+  <section class="hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">1986'dan Beri Güvenilir Yapı Partneri</div>
+      <h1 class="hero-title">
+        Temel Malzeme,<br />
+        <span class="accent">Güçlü Yapı</span>
+      </h1>
+      <p class="hero-desc">
+        Şahinkaya Ticaret; müteahhitler, inşaat ustaları ve yapı kooperatiflerinin<br>çimento'dan demire, yalıtımdan seramiğe her ihtiyacında yanındadır.
+      </p>
+      <div class="hero-actions">
+        <a href="#urunler" class="btn btn-primary">Ürünleri İncele</a>
+        <a href="#iletisim" class="btn btn-outline">Ücretsiz Teklif Al</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">2500+</span>
+          <span class="hero-stat-label">Tamamlanan Proje</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">18+</span>
+          <span class="hero-stat-label">Yıllık Tecrübe</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">450+</span>
+          <span class="hero-stat-label">Müteahhit Müşteri</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Keşfet</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Hizmetler Bölümü -->
+  <section class="section" id="hizmetler">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Hizmetlerimiz</span>
+        <h2>Her İnşaat İhtiyacınız<br /><span class="accent">Tek Çatı Altında</span></h2>
+        <p>Toptan malzeme satışından şantiye lojistiğine, teknik danışmanlıktan ithal ürün teminne — projenizin her aşamasında yanınızdayız.</p>
+      </div>
+      <div class="cards-grid cards-grid-3">
+        <div class="card">
+          <div class="card-icon-wrap">🏗️</div>
+          <h3>Toptan & Perakende Satış</h3>
+          <p>Lafarge, Akçansa, İskenderun ve Çimko gibi önde gelen markaların 12.000'den fazla ürününü stoktan temin ediyoruz. Hem bireysel hem kurumsal alım seçenekleri mevcuttur.</p>
+          <div class="card-accent-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon-wrap">🚛</div>
+          <h3>Şantiyeye Kapıda Teslimat</h3>
+          <p>12 araçlık kendi nakliye filomuzla, sipariş verilen gün içinde İstanbul genelinde teslimat yapıyoruz. Vinçli araç gerektiren ağır yükler dahil.</p>
+          <div class="card-accent-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon-wrap">📐</div>
+          <h3>Ücretsiz Teknik Keşif & Metraj</h3>
+          <p>Uzman ekibimiz şantiyenize gelir, projenizin metraj hesabını çıkarır; malzeme listesi ve maliyet tahmini hazırlar. Keşif tamamen ücretsizdir.</p>
+          <div class="card-accent-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon-wrap">💳</div>
+          <h3>Müteahhit Cari Hesabı</h3>
+          <p>Aktif müteahhitler için 30, 60 veya 90 günlük vadeli ödeme imkânı. Toplu siparişlerde ek iskonto ve öncelikli stok rezervasyonu.</p>
+          <div class="card-accent-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon-wrap">📦</div>
+          <h3>Stok Rezervasyonu</h3>
+          <p>Büyük projeler için malzemeleri aylar öncesinden fiyat garantisiyle rezerve ediyoruz. Fiyat dalgalanmalarından etkilenmeden güvenle planlayın.</p>
+          <div class="card-accent-line"></div>
+        </div>
+        <div class="card">
+          <div class="card-icon-wrap">🌍</div>
+          <h3>İthal Malzeme Temini</h3>
+          <p>Avusturya'dan alüminyum profil, İspanya'dan seramik, Almanya'dan ısı yalıtım sistemleri dahil Avrupa ve Asya kaynaklı ürünleri doğrudan temin ediyoruz.</p>
+          <div class="card-accent-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ürünler Bölümü -->
+  <section class="section section-alt" id="urunler">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ürün Kategorileri</span>
+        <h2>Kaliteli Malzeme,<br /><span class="accent">Güvenli Yapı</span></h2>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img cement"></div>
+          <div class="product-info">
+            <span class="product-cat">Beton & Çimento</span>
+            <h3>Portland Çimentosu</h3>
+            <p>CEM I 42.5 R standartlarında yüksek mukavemetli çimento, tüm paket boyutlarında stokta.</p>
+            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img iron"></div>
+          <div class="product-info">
+            <span class="product-cat">Demir & Çelik</span>
+            <h3>İnşaat Demiri</h3>
+            <p>B420C nervürlü inşaat demiri, 8mm'den 32mm'ye tüm çaplar depreme dayanıklı üretimle.</p>
+            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
+          </div>
+        </div>
+        <div class="product-card product-card-featured">
+          <div class="featured-tag">En Çok Satan</div>
+          <div class="product-img gazbeton"></div>
+          <div class="product-info">
+            <span class="product-cat">Duvar & Blok</span>
+            <h3>Gazbeton Blok</h3>
+            <p>Hafif, ısı ve ses yalıtımlı yüksek basınçlı gazbeton. A+ enerji sınıfı binalarda tercih edilen ürün.</p>
+            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img insulation"></div>
+          <div class="product-info">
+            <span class="product-cat">Isı & Ses Yalıtımı</span>
+            <h3>EPS / XPS Plaka</h3>
+            <p>Enerji verimliliği sertifikalı EPS ve XPS yalıtım plakaları. Tüm kalınlıklar mevcuttur.</p>
+            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Referanslar / İstatistik Bölümü -->
+  <section class="section stats-section" id="referanslar">
+    <div class="container">
+      <div class="section-header section-header-light">
+        <span class="section-tag">Rakamlarla Şahinkaya</span>
+        <h2>38 Yıllık Deneyim,<br /><span class="accent">Binlerce Başarılı Proje</span></h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value"><span class="counter" data-target="4200">0</span>+</div>
+          <div class="stat-label">Tamamlanan Proje</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><span class="counter" data-target="850">0</span>+</div>
+          <div class="stat-label">Müteahhit Müşteri</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><span class="counter" data-target="120">0</span>+</div>
+          <div class="stat-label">Marka & Tedarikçi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><span class="counter" data-target="38">0</span>+</div>
+          <div class="stat-label">Yıllık Tecrübe</div>
+        </div>
+      </div>
+
+      <!-- Tedarik Yapılan Büyük Referans Projeler -->
+      <div class="ref-projects-wrap">
+        <p class="ref-title">Malzeme Tedariki Gerçekleştirilen Büyük Projeler</p>
+        <div class="ref-projects-grid">
+          <div class="ref-project-item">
+            <div class="ref-icon">🛣️</div>
+            <div class="ref-info">
+              <span class="ref-name">Kuzey Marmara Otoyolu</span>
+              <span class="ref-detail">427 km — Altyapı beton malzemeleri tedariki</span>
+            </div>
+          </div>
+          <div class="ref-project-item">
+            <div class="ref-icon">🌉</div>
+            <div class="ref-info">
+              <span class="ref-name">Osmangazi Köprüsü</span>
+              <span class="ref-detail">İzmit Körfezi — Yapısal çelik destek malzemeleri</span>
+            </div>
+          </div>
+          <div class="ref-project-item">
+            <div class="ref-icon">✈️</div>
+            <div class="ref-info">
+              <span class="ref-name">İstanbul Havalimanı İnşaatı</span>
+              <span class="ref-detail">76 milyon m² — Terminal duvar & döşeme malzemeleri</span>
+            </div>
+          </div>
+          <div class="ref-project-item">
+            <div class="ref-icon">🏥</div>
+            <div class="ref-info">
+              <span class="ref-name">Etlik Şehir Hastanesi</span>
+              <span class="ref-detail">Ankara — Isı yalıtımı ve iç duvar sistemleri</span>
+            </div>
+          </div>
+          <div class="ref-project-item">
+            <div class="ref-icon">🏘️</div>
+            <div class="ref-info">
+              <span class="ref-name">TOKİ Başakşehir Konut</span>
+              <span class="ref-detail">3.200 konut — Gazbeton blok ve çimento toptan tedariki</span>
+            </div>
+          </div>
+          <div class="ref-project-item">
+            <div class="ref-icon">🌉</div>
+            <div class="ref-info">
+              <span class="ref-name">1915 Çanakkale Köprüsü</span>
+              <span class="ref-detail">Bağlantı yolları — Zemin stabilizasyon malzemeleri</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- İletişim / Teklif CTA -->
+  <section class="section" id="iletisim">
+    <div class="container">
+      <div class="cta-wrapper">
+        <div class="cta-text">
+          <span class="section-tag">Hemen Başlayalım</span>
+          <h2>Projeniz İçin<br /><span class="accent">Ücretsiz Teklif</span></h2>
+          <p>Uzman ekibimiz projenizin ihtiyaçlarını analiz edip en uygun fiyatı 24 saat içinde size ulaştırır.</p>
+          <ul class="cta-benefits">
+            <li><span class="check">✓</span> 24 saat içinde geri dönüş garantisi</li>
+            <li><span class="check">✓</span> Ücretsiz teknik keşif ve danışmanlık</li>
+            <li><span class="check">✓</span> Toplu alıma özel müteahhit indirimi</li>
+            <li><span class="check">✓</span> Şantiyeye kapıya teslim seçeneği</li>
+          </ul>
+        </div>
+        <!-- Form — frontend validasyon, submit backend'e bağlanacak -->
+        <form class="cta-form" id="ctaForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Ad Soyad</label>
+              <input type="text" id="name" name="name" placeholder="Ahmet Yılmaz" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="phone" placeholder="0 (5XX) XXX XX XX" autocomplete="tel" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="project">Proje Türü</label>
+            <select id="project" name="project" required>
+              <option value="">Proje türünü seçiniz...</option>
+              <option value="konut">Konut İnşaatı</option>
+              <option value="ticari">Ticari Yapı</option>
+              <option value="tadilat">Tadilat / Restorasyon</option>
+              <option value="altyapi">Altyapı Projesi</option>
+              <option value="diger">Diğer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Proje Detayları</label>
+            <textarea id="message" name="message" rows="4" placeholder="Projeniz hakkında kısa bilgi verin (m², malzeme ihtiyacı vb.)..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Teklif Talep Et</button>
+          <p id="formApiError" class="form-api-error" style="display:none"></p>
+          <p class="form-note">Bilgileriniz üçüncü taraflarla paylaşılmaz.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo footer-logo">
+            <span class="logo-hex">⬡</span>
+            <span>ŞAHİN<span class="accent">KAYA</span></span>
+          </a>
+          <p>1986'dan bu yana müteahhitlerin, inşaat kooperatiflerinin ve yapı ustalarının güvenilir yapı malzemesi çözüm ortağıyız.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Hızlı Bağlantılar</h4>
+          <ul>
+            <li><a href="#hizmetler">Hizmetler</a></li>
+            <li><a href="#urunler">Ürünler</a></li>
+            <li><a href="#referanslar">Referanslar</a></li>
+            <li><a href="#iletisim">Teklif Al</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kategoriler</h4>
+          <ul>
+            <li><a href="#urunler">Beton & Çimento</a></li>
+            <li><a href="#urunler">Demir & Çelik</a></li>
+            <li><a href="#urunler">Ytong / Gazbeton</a></li>
+            <li><a href="#urunler">Isı & Ses Yalıtımı</a></li>
+            <li><a href="#urunler">Çatı & Cephe</a></li>
+            <li><a href="#urunler">Seramik & Zemin</a></li>
+            <li><a href="#urunler">Boya & Sıva</a></li>
+            <li><a href="#urunler">Su İzolasyonu</a></li>
+            <li><a href="#urunler">Elektrik & Tesisat</a></li>
+            <li><a href="#urunler">Alüminyum & PVC</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>İletişim</h4>
+          <ul class="footer-contact-list">
+            <li>📍 İkitelli OSB, Başakşehir / İstanbul</li>
+            <li>📞 0 (212) 671 00 00</li>
+            <li>📱 0 (530) 800 00 00 (WhatsApp)</li>
+            <li>✉️ info@sahinkayaticaret.com.tr</li>
+            <li>🕐 Hft. içi 07:30 – 18:30 · Cmt 08:00–14:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Şahinkaya Ticaret Yapı Malzemeleri Ltd. Şti. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

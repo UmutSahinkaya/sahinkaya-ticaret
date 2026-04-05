@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Paneli | Şahinkaya Ticaret</title>
+  <style>
+    :root {
+      --bg: #0f0f0f; --surface: #1a1a1a; --surface2: #222;
+      --border: #2e2e2e; --text: #e5e5e5; --muted: #777;
+      --accent: #f97316; --success: #22c55e; --danger: #ef4444;
+      --warn: #eab308;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── GİRİŞ EKRANI ── */
+    #loginScreen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+    }
+    .login-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 40px 36px; width: 100%; max-width: 380px; text-align: center;
+    }
+    .login-box h1 { font-size: 1.4rem; margin-bottom: 6px; color: var(--accent); }
+    .login-box p  { color: var(--muted); font-size: 0.88rem; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%; padding: 12px 14px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.95rem; margin-bottom: 14px; outline: none;
+    }
+    .login-box input:focus { border-color: var(--accent); }
+    .login-box button {
+      width: 100%; padding: 12px; background: var(--accent); color: #fff;
+      border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    }
+    .login-box button:hover { background: #c2570c; }
+    #loginError { color: var(--danger); font-size: 0.83rem; margin-top: 10px; display: none; }
+
+    /* ── PANEL ── */
+    #adminPanel { display: none; }
+
+    header {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+    }
+    header h1 { font-size: 1.1rem; }
+    header span { color: var(--accent); }
+    #logoutBtn {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+    }
+    #logoutBtn:hover { border-color: var(--danger); color: var(--danger); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+    /* Özet kartlar */
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 36px;
+    }
+    .summary-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px 18px; text-align: center;
+    }
+    .summary-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .summary-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Filtre */
+    .filter-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 7px 16px; border-radius: 6px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); cursor: pointer; font-size: 0.85rem; transition: 0.2s;
+    }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Tablo */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { background: var(--surface2); padding: 12px 14px; text-align: left; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; font-size: 0.78rem; text-transform: uppercase; }
+    td { padding: 13px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* Durum badge */
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.3px;
+    }
+    .badge-yeni      { background: rgba(249,115,22,0.15); color: var(--accent); }
+    .badge-aranıyor  { background: rgba(234,179,8,0.15);  color: var(--warn); }
+    .badge-tamamlandı{ background: rgba(34,197,94,0.15);  color: var(--success); }
+    .badge-iptal     { background: rgba(239,68,68,0.15);  color: var(--danger); }
+
+    /* Durum değiştirme */
+    .durum-sel {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text); padding: 4px 8px; font-size: 0.82rem; cursor: pointer; outline: none;
+    }
+    .durum-sel:focus { border-color: var(--accent); }
+
+    .mesaj-col { max-width: 280px; color: var(--muted); }
+
+    #loadingMsg { text-align: center; color: var(--muted); padding: 48px 0; }
+    #emptyMsg   { text-align: center; color: var(--muted); padding: 48px 0; display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- GİRİŞ EKRANI -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h1>⬡ ŞAHİN<span style="color:#ccc">KAYA</span></h1>
+      <p>Admin Paneli Girişi</p>
+      <input type="password" id="tokenInput" placeholder="Admin token giriniz..." autocomplete="current-password" />
+      <button id="loginBtn">Giriş Yap</button>
+      <p id="loginError">Geçersiz token. Lütfen tekrar deneyin.</p>
+    </div>
+  </div>
+
+  <!-- ADMIN PANELİ -->
+  <div id="adminPanel">
+    <header>
+      <h1>⬡ <span>ŞAHİN</span>KAYA — Teklif Yönetimi</h1>
+      <button id="logoutBtn">Çıkış Yap</button>
+    </header>
+    <main>
+      <!-- Özet kartlar -->
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="num" id="sumToplam">—</div>
+          <div class="lbl">Toplam Teklif</div>
+        </div>
+        <div class="summary-card">
+          <div class="num" id="sumYeni" style="color:#f97316">—</div>
+          <div class="lbl">Yeni</div>
+        </div>
+        <div class="summary-card">
+          <div class="num" id="sumAranıyor" style="color:#eab308">—</div>
+          <div class="lbl">Aranıyor</div>
+        </div>
+        <div class="summary-card">
+          <div class="num" id="sumTamamlandı" style="color:#22c55e">—</div>
+          <div class="lbl">Tamamlandı</div>
+        </div>
+        <div class="summary-card">
+          <div class="num" id="sumIptal" style="color:#ef4444">—</div>
+          <div class="lbl">İptal</div>
+        </div>
+      </div>
+
+      <!-- Filtre -->
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="hepsi">Hepsi</button>
+        <button class="filter-btn" data-filter="yeni">Yeni</button>
+        <button class="filter-btn" data-filter="aranıyor">Aranıyor</button>
+        <button class="filter-btn" data-filter="tamamlandı">Tamamlandı</button>
+        <button class="filter-btn" data-filter="iptal">İptal</button>
+      </div>
+
+      <!-- Tablo -->
+      <div class="table-wrap">
+        <div id="loadingMsg">Yükleniyor...</div>
+        <div id="emptyMsg">Henüz teklif talebi bulunmuyor.</div>
+        <table id="teklifTable" style="display:none">
+          <thead>
+            <tr>
+              <th>Tarih</th>
+              <th>Ad Soyad</th>
+              <th>Telefon</th>
+              <th>Proje Türü</th>
+              <th>Mesaj</th>
+              <th>Durum</th>
+            </tr>
+          </thead>
+          <tbody id="teklifBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    'use strict';
+
+    const API_BASE   = '/api';
+    let   adminToken = '';
+    let   tumTeklifler = [];
+    let   aktifFiltre  = 'hepsi';
+
+    const projeLabels = {
+      konut: 'Konut İnşaatı', ticari: 'Ticari Yapı',
+      tadilat: 'Tadilat / Restorasyon', altyapi: 'Altyapı Projesi', diger: 'Diğer',
+    };
+
+    // ── GİRİŞ ──
+    document.getElementById('loginBtn').addEventListener('click', doLogin);
+    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    async function doLogin() {
+      const token = document.getElementById('tokenInput').value.trim();
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/teklifler`, {
+          headers: { 'x-admin-token': token },
+        });
+        if (!res.ok) throw new Error('Yetkisiz');
+
+        adminToken = token;
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminPanel').style.display  = 'block';
+        tumTeklifler = await res.json();
+        renderPanel();
+      } catch (_) {
+        const errEl = document.getElementById('loginError');
+        errEl.style.display = 'block';
+        setTimeout(() => (errEl.style.display = 'none'), 3000);
+      }
+    }
+
+    // ── ÇIKIŞ ──
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      adminToken = '';
+      document.getElementById('adminPanel').style.display  = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('tokenInput').value = '';
+    });
+
+    // ── FİLTRE ──
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        aktifFiltre = btn.dataset.filter;
+        renderTable();
+      });
+    });
+
+    // ── PANEL RENDER ──
+    function renderPanel() {
+      document.getElementById('sumToplam').textContent    = tumTeklifler.length;
+      document.getElementById('sumYeni').textContent      = tumTeklifler.filter((t) => t.durum === 'yeni').length;
+      document.getElementById('sumAranıyor').textContent  = tumTeklifler.filter((t) => t.durum === 'aranıyor').length;
+      document.getElementById('sumTamamlandı').textContent= tumTeklifler.filter((t) => t.durum === 'tamamlandı').length;
+      document.getElementById('sumIptal').textContent     = tumTeklifler.filter((t) => t.durum === 'iptal').length;
+      document.getElementById('loadingMsg').style.display = 'none';
+      renderTable();
+    }
+
+    function renderTable() {
+      const filtreli = aktifFiltre === 'hepsi'
+        ? tumTeklifler
+        : tumTeklifler.filter((t) => t.durum === aktifFiltre);
+
+      const table  = document.getElementById('teklifTable');
+      const empty  = document.getElementById('emptyMsg');
+      const tbody  = document.getElementById('teklifBody');
+
+      if (filtreli.length === 0) {
+        table.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      table.style.display = 'table';
+      tbody.innerHTML = filtreli.map((t) => `
+        <tr id="row-${t.id}">
+          <td style="white-space:nowrap;color:#aaa">${t.tarih}</td>
+          <td><strong>${escHtml(t.ad)}</strong></td>
+          <td><a href="tel:${escHtml(t.telefon)}" style="color:var(--accent)">${escHtml(t.telefon)}</a></td>
+          <td>${escHtml(projeLabels[t.projetipi] || t.projetipi)}</td>
+          <td class="mesaj-col">${escHtml(t.mesaj || '—')}</td>
+          <td>
+            <select class="durum-sel" data-id="${t.id}" title="Durumu güncelle">
+              ${['yeni','aranıyor','tamamlandı','iptal'].map((d) =>
+                `<option value="${d}" ${d === t.durum ? 'selected' : ''}>${d}</option>`
+              ).join('')}
+            </select>
+          </td>
+        </tr>
+      `).join('');
+
+      // Durum değiştirme olaylarını bağla
+      tbody.querySelectorAll('.durum-sel').forEach((sel) => {
+        sel.addEventListener('change', async (e) => {
+          const id    = parseInt(e.target.dataset.id, 10);
+          const durum = e.target.value;
+          await updateDurum(id, durum, e.target);
+        });
+      });
+    }
+
+    async function updateDurum(id, durum, selEl) {
+      try {
+        const res = await fetch(`${API_BASE}/admin/teklifler/${id}`, {
+          method:  'PATCH',
+          headers: { 'Content-Type': 'application/json', 'x-admin-token': adminToken },
+          body:    JSON.stringify({ durum }),
+        });
+        if (!res.ok) throw new Error();
+        const teklif = tumTeklifler.find((t) => t.id === id);
+        if (teklif) teklif.durum = durum;
+        renderPanel();
+      } catch (_) {
+        // Hata durumunda onChange geri al
+        selEl.value = tumTeklifler.find((t) => t.id === id)?.durum || 'yeni';
+        alert('Durum güncellenemedi. Sunucu bağlantısını kontrol edin.');
+      }
+    }
+
+    // HTML injection koruması
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

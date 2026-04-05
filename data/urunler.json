@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "ad": "Portland Çimentosu CEM I 42.5 R",
+    "kategori": "Beton & Çimento",
+    "marka": "Lafarge",
+    "aciklama": "Yüksek erken dayanım sağlayan Portland çimentosu. 25 kg torba ve dökme seçenekleri mevcuttur. Konut, ticari yapı ve altyapı projelerinde kullanılır.",
+    "ozellik": "CEM I 42.5 R — EN 197-1 sertifikalı",
+    "resimSinif": "cement",
+    "enCokSatan": false
+  },
+  {
+    "id": 2,
+    "ad": "Erken Dayanımlı Çimento CEM III 52.5",
+    "kategori": "Beton & Çimento",
+    "marka": "Akçansa",
+    "aciklama": "Yüksek sülfit dirençli, soğuk hava betonlamasına uygun yüksek dayanımlı çimento. Köprü, tünel ve baraj projelerinde tercih edilir.",
+    "ozellik": "CEM III 52.5 — Sülfat direnci yüksek",
+    "resimSinif": "cement",
+    "enCokSatan": false
+  },
+  {
+    "id": 3,
+    "ad": "B420C Nervürlü İnşaat Demiri",
+    "kategori": "Demir & Çelik",
+    "marka": "İskenderun Demir Çelik",
+    "aciklama": "Depreme dayanıklı üretimle, TS 708 standardına uygun nervürlü inşaat demiri. 8 mm'den 32 mm'ye tüm çaplar stokta.",
+    "ozellik": "TS 708 — B420C sınıfı nervürlü",
+    "resimSinif": "iron",
+    "enCokSatan": true
+  },
+  {
+    "id": 4,
+    "ad": "Boru Profil (Kare/Dikdörtgen)",
+    "kategori": "Demir & Çelik",
+    "marka": "Çelik A.Ş.",
+    "aciklama": "Çelik konstrüksiyonlar, asma çatılar ve endüstriyel yapılar için kare ve dikdörtgen boru profil. 6 metre boyda, tüm kesitler.",
+    "ozellik": "EN 10210 sertifikalı — S355 kalite",
+    "resimSinif": "iron",
+    "enCokSatan": false
+  },
+  {
+    "id": 5,
+    "ad": "Ytong PP2/0,35 Gazbeton Blok",
+    "kategori": "Ytong & Gazbeton",
+    "marka": "Ytong",
+    "aciklama": "Hafif, ısı ve ses yalıtımlı yüksek otoklavlanmış gazbeton. A+ enerji sınıfı konutlarda standart seçim. 75'ten 300 mm'ye tüm kalınlıklar.",
+    "ozellik": "TS EN 771-4 — A+ enerji sınıfı",
+    "resimSinif": "gazbeton",
+    "enCokSatan": true
+  },
+  {
+    "id": 6,
+    "ad": "Tuğla 13,5 cm Delikli Bims",
+    "kategori": "Ytong & Gazbeton",
+    "marka": "Kütahya Tuğla",
+    "aciklama": "Hafif ve işlenmesi kolay delikli bims tuğla. Ses yalıtımı iyi, kırılmaya dayanıklı. Bölme ve dolgu duvar uygulamaları için ideal.",
+    "ozellik": "TS EN 771-1 — Hafif delikli bims",
+    "resimSinif": "gazbeton",
+    "enCokSatan": false
+  },
+  {
+    "id": 7,
+    "ad": "EPS Grafitli Isı Yalıtım Levhası",
+    "kategori": "Isı & Ses Yalıtımı",
+    "marka": "İzocam",
+    "aciklama": "Grafit katkılı genişletilmiş polistiren. Normal EPS'e göre %20 daha yüksek ısıl direnç. Dış cephe mantolama, zemin ve teras uygulamalarında.",
+    "ozellik": "λ=0,031 W/mK — Yangın sınıfı E",
+    "resimSinif": "insulation",
+    "enCokSatan": true
+  },
+  {
+    "id": 8,
+    "ad": "XPS Ekstrüde Polistiren 5 cm",
+    "kategori": "Isı & Ses Yalıtımı",
+    "marka": "Knauf",
+    "aciklama": "Suya dayanıklı, yüksek basınç dirençli XPS plaka. Zemin döşemesi, bodrum duvarları ve ters çatı uygulamaları için standart tercih.",
+    "ozellik": "λ=0,033 W/mK — CS(10)300 basınç",
+    "resimSinif": "insulation",
+    "enCokSatan": false
+  },
+  {
+    "id": 9,
+    "ad": "Trapez Sac Çatı Kaplama",
+    "kategori": "Çatı & Cephe",
+    "marka": "Çelikform",
+    "aciklama": "Galvanizli ve boyalı trapez sac. Endüstriyel tesisler, depolar ve çiftlik binaları için uygun fiyatlı çatı kaplama çözümü.",
+    "ozellik": "DX51D galvanizli — 0,5 mm kalınlık",
+    "resimSinif": "gazbeton",
+    "enCokSatan": false
+  },
+  {
+    "id": 10,
+    "ad": "Sandviç Panel (EPS Dolgulu)",
+    "kategori": "Çatı & Cephe",
+    "marka": "Pano A.Ş.",
+    "aciklama": "Her iki yüzü çelik sac, ortası EPS köpük dolgulu sandviç panel. Sanayi binaları, soğuk hava depoları ve sürekli yapılarda hızlı montaj.",
+    "ozellik": "Yangın sınıfı B2 — 80 mm EPS çekirdek",
+    "resimSinif": "insulation",
+    "enCokSatan": false
+  },
+  {
+    "id": 11,
+    "ad": "Karo Seramik 60×60 cm Mat",
+    "kategori": "Seramik & Zemin",
+    "marka": "Kale Seramik",
+    "aciklama": "İç mekan zemin ve duvar için 60x60 cm mat sırlı porselen seramik. R9 kaymaz yüzey. 12 renk seçeneği ile stokta.",
+    "ozellik": "ISO 10545 — PEI IV yüzey sertliği",
+    "resimSinif": "cement",
+    "enCokSatan": false
+  },
+  {
+    "id": 12,
+    "ad": "Dış Cephe Boyası Silikon Esaslı",
+    "kategori": "Boya & Kimyasallar",
+    "marka": "Marshall",
+    "aciklama": "Su itici, nefes alabilir, 10 yıl renk garantili silikonlu dış cephe boyası. UV dayanımı yüksek, 1000+ renk seçeneği.",
+    "ozellik": "EN 1062 — Su buharı geçirgenliği SD < 0,14",
+    "resimSinif": "insulation",
+    "enCokSatan": false
+  }
+]
