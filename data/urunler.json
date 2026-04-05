@@ -118,5 +118,65 @@
     "ozellik": "EN 1062 — Su buharı geçirgenliği SD < 0,14",
     "resimSinif": "insulation",
     "enCokSatan": false
+  },
+  {
+    "id": 13,
+    "ad": "Weber.col Flex C2TE Seramik Yapıştırıcı",
+    "kategori": "Yapı Kimyasalları",
+    "marka": "Weber",
+    "aciklama": "Büyük format seramik, granit ve doğal taş için çift yapışmalı, esnek, kayma önleyici C2TE sınıfı yapıştırıcı. Zemin ve duvar uygulamaları için.",
+    "ozellik": "EN 12004 C2TE — Kayma karşıtı, esnek",
+    "resimSinif": "kimyasal",
+    "enCokSatan": true
+  },
+  {
+    "id": 14,
+    "ad": "Mapei Ultracolor Plus FA Derz Dolgusu",
+    "kategori": "Yapı Kimyasalları",
+    "marka": "Mapei",
+    "aciklama": "Su, kir ve küf tutmaz özellikte anti-bakteriyel derz dolgusu. 2–20 mm derz aralıkları için 36 renk seçeneği. İç ve dış mekan uyumlu.",
+    "ozellik": "EN 13888 CG2WA — Su itici, anti-bakteriyel",
+    "resimSinif": "kimyasal",
+    "enCokSatan": false
+  },
+  {
+    "id": 15,
+    "ad": "Quick-Step Impressive IM1855 Laminat",
+    "kategori": "Zemin Kaplamaları",
+    "marka": "Quick-Step",
+    "aciklama": "Meşe görünümlü, 8 mm kalınlıkta AC4 sınıfı laminat parke. Klipsli montaj, yüksek nem direnci, 25 yıl aşınma garantisi. Konut ve hafif ticari kullanım.",
+    "ozellik": "AC4 — 8 mm, 25 yıl garanti",
+    "resimSinif": "zemin",
+    "enCokSatan": true
+  },
+  {
+    "id": 16,
+    "ad": "Tarkett Granit Safe T Endüstriyel PVC",
+    "kategori": "Zemin Kaplamaları",
+    "marka": "Tarkett",
+    "aciklama": "Hastane, okul, AVM gibi yüksek trafikli alanlara özel, kaymaz yüzeyli homojen PVC zemin. 2 mm kalınlık, rulo formunda, kolay temizlenir.",
+    "ozellik": "EN 649 — R10 kaymaz, 2 mm homojen",
+    "resimSinif": "zemin",
+    "enCokSatan": false
+  },
+  {
+    "id": 17,
+    "ad": "Vesbo PN20 PPR Boru & Bağlantı Seti",
+    "kategori": "Elektrik & Tesisat",
+    "marka": "Vesbo",
+    "aciklama": "Sıcak ve soğuk su tesisatı için PN20 sınıfı PPR boru ve kaynak ekleme seti. 20–110 mm arası tüm çaplar; korozyona ve ölçek birikimine karşı dayanıklı.",
+    "ozellik": "DIN 8077 PN20 — 20–110 mm, gıda uyumlu",
+    "resimSinif": "tesisat",
+    "enCokSatan": false
+  },
+  {
+    "id": 18,
+    "ad": "Niedax RKS 60×40 Kablo Kanalı",
+    "kategori": "Elektrik & Tesisat",
+    "marka": "Niedax",
+    "aciklama": "Alev geciktirici, sertifikalı PVC kablo kanalı. Konuttan endüstriyel tesisata kadar elektrik tesisat düzenlemesinde standart tercih. Kapak dahil.",
+    "ozellik": "IEC 61084-1 — Alev geciktirici, UV dirençli",
+    "resimSinif": "tesisat",
+    "enCokSatan": false
   }
 ]

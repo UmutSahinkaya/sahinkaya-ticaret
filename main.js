@@ -428,6 +428,9 @@ const RESIM_MAP = {
   iron:       'https://images.unsplash.com/photo-1565793979441-3bb16b878ac1?w=600&q=80&auto=format&fit=crop',
   gazbeton:   'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600&q=80&auto=format&fit=crop',
   insulation: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80&auto=format&fit=crop',
+  kimyasal:   'https://images.unsplash.com/photo-1590845947376-2638caa89309?w=600&q=80&auto=format&fit=crop',
+  zemin:      'https://images.unsplash.com/photo-1562113530-57ba467cea38?w=600&q=80&auto=format&fit=crop',
+  tesisat:    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop',
 };
 
 async function loadProducts() {
