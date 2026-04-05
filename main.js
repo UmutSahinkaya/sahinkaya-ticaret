@@ -418,38 +418,153 @@ function initForm() {
 }
 
 // ─────────────────────────────────────────────
-// 7a. ÜRÜNLER — API'den çek, yoksa statik koru
 // ─────────────────────────────────────────────
+// 7a. ÜRÜNLER — Kategori filtresi + Slider
+// ─────────────────────────────────────────────
+
+// Kategori bazlı Unsplash fotoğrafları (resimSinif -> URL)
+const RESIM_MAP = {
+  cement:     'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&auto=format&fit=crop',
+  iron:       'https://images.unsplash.com/photo-1565793979441-3bb16b878ac1?w=600&q=80&auto=format&fit=crop',
+  gazbeton:   'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600&q=80&auto=format&fit=crop',
+  insulation: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80&auto=format&fit=crop',
+};
+
 async function loadProducts() {
-  const grid = document.querySelector('.products-grid');
-  if (!grid) return;
+  const catTabsEl  = document.getElementById('catTabs');
+  const track      = document.getElementById('sliderTrack');
+  const dotsEl     = document.getElementById('sliderDots');
+  const prevBtn    = document.getElementById('sliderPrev');
+  const nextBtn    = document.getElementById('sliderNext');
+  if (!track) return;
 
+  // API'den ürünleri çek
+  let urunler = [];
   try {
-    const res  = await fetch('/api/urunler');
-    if (!res.ok) return; // Statik HTML kartlarını koru
-    const data = await res.json();
-  } catch (_) {
-    data = {};
-  }
-
-  const urunler = data.urunler || [];
+    const res = await fetch('/api/urunler');
+    if (res.ok) urunler = await res.json();
+  } catch (_) {}
   if (!Array.isArray(urunler) || urunler.length === 0) return;
 
-  const gosterilecek = urunler.slice(0, 8);
+  let activeCat  = 'hepsi';
+  let sliderPage = 0;
 
-  grid.innerHTML = gosterilecek.map((u) => `
-      <div class="product-card${u.enCokSatan ? ' product-card-featured' : ''}">
-        ${u.enCokSatan ? '<div class="featured-tag">En Çok Satan</div>' : ''}
-        <div class="product-img ${u.resimSinif || 'cement'}"></div>
-        <div class="product-info">
-          <span class="product-cat">${escHtml(u.kategori)}</span>
-          <h3>${escHtml(u.ad)}</h3>
-          <p>${escHtml(u.aciklama)}</p>
-          <span class="product-spec">${escHtml(u.ozellik || '')}</span>
-          <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
-        </div>
-      </div>
-    `).join('');
+  function cpp() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640)  return 2;
+    return 1;
+  }
+
+  function visible() {
+    if (activeCat === 'hepsi') return urunler;
+    return urunler.filter((u) => u.kategori === activeCat);
+  }
+
+  // Kategori tablarını oluştur
+  if (catTabsEl) {
+    const cats = [...new Set(urunler.map((u) => u.kategori))];
+    catTabsEl.innerHTML =
+      `<button class="cat-tab is-active" data-cat="hepsi">Tümü (${urunler.length})</button>` +
+      cats.map((k) => `<button class="cat-tab" data-cat="${escHtml(k)}">${escHtml(k)}</button>`).join('');
+
+    catTabsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-tab');
+      if (!btn) return;
+      activeCat = btn.dataset.cat;
+      sliderPage = 0;
+      catTabsEl.querySelectorAll('.cat-tab').forEach((t) => t.classList.toggle('is-active', t === btn));
+      renderSlider();
+    });
+  }
+
+  function renderSlider() {
+    const list   = visible();
+    const perPage = cpp();
+    const pages   = Math.max(1, Math.ceil(list.length / perPage));
+    sliderPage    = Math.min(sliderPage, pages - 1);
+
+    // Kartları render et
+    track.innerHTML = list.map((u) => {
+      const img = RESIM_MAP[u.resimSinif] || '';
+      return `
+        <div class="product-card${u.enCokSatan ? ' product-card-featured' : ''}">
+          ${u.enCokSatan ? '<div class="featured-tag">En Çok Satan</div>' : ''}
+          <div class="product-img ${u.resimSinif || 'cement'}">
+            ${img ? `<img src="${img}" alt="${escHtml(u.ad)}" loading="lazy" onerror="this.style.display='none'">` : ''}
+          </div>
+          <div class="product-info">
+            <span class="product-cat">${escHtml(u.kategori)}</span>
+            <h3>${escHtml(u.ad)}</h3>
+            <span class="product-brand">${escHtml(u.marka)}</span>
+            <p>${escHtml(u.aciklama)}</p>
+            <span class="product-spec">${escHtml(u.ozellik || '')}</span>
+            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Slider offset (px tabanlı)
+    requestAnimationFrame(() => {
+      const first = track.querySelector('.product-card');
+      if (first) {
+        const gap     = 24;
+        const cardW   = first.offsetWidth;
+        track.style.transform = `translateX(-${sliderPage * perPage * (cardW + gap)}px)`;
+      }
+    });
+
+    // Dots
+    if (dotsEl) {
+      dotsEl.innerHTML = Array.from({ length: pages }, (_, i) =>
+        `<button class="slider-dot${i === sliderPage ? ' is-active' : ''}" data-page="${i}" aria-label="Sayfa ${i + 1}"></button>`
+      ).join('');
+      dotsEl.querySelectorAll('.slider-dot').forEach((b) =>
+        b.addEventListener('click', () => { sliderPage = +b.dataset.page; renderSlider(); })
+      );
+    }
+
+    // Ok butonları
+    if (prevBtn) prevBtn.disabled = sliderPage === 0;
+    if (nextBtn) nextBtn.disabled = sliderPage >= pages - 1;
+
+    // Giriş animasyonu
+    if (window.gsap) {
+      gsap.fromTo(
+        track.querySelectorAll('.product-card'),
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.35, stagger: 0.07, ease: 'power2.out' }
+      );
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => { if (sliderPage > 0) { sliderPage--; renderSlider(); } });
+  nextBtn?.addEventListener('click', () => {
+    const pages = Math.ceil(visible().length / cpp());
+    if (sliderPage < pages - 1) { sliderPage++; renderSlider(); }
+  });
+
+  // Dokunmatik kaydırma
+  let touchX = 0;
+  const viewport = document.querySelector('.slider-viewport');
+  if (viewport) {
+    viewport.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      const diff = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) < 50) return;
+      const pages = Math.ceil(visible().length / cpp());
+      if (diff > 0 && sliderPage < pages - 1) { sliderPage++; renderSlider(); }
+      else if (diff < 0 && sliderPage > 0)     { sliderPage--; renderSlider(); }
+    }, { passive: true });
+  }
+
+  // Ekran boyutu değişince sıfırla
+  let rTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(rTimer);
+    rTimer = setTimeout(() => { sliderPage = 0; renderSlider(); }, 200);
+  });
+
+  renderSlider();
 }
 
 // HTML injection güvenlik yardımcısı

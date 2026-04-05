@@ -132,45 +132,21 @@
         <span class="section-tag">Ürün Kategorileri</span>
         <h2>Kaliteli Malzeme,<br /><span class="accent">Güvenli Yapı</span></h2>
       </div>
-      <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img cement"></div>
-          <div class="product-info">
-            <span class="product-cat">Beton & Çimento</span>
-            <h3>Portland Çimentosu</h3>
-            <p>CEM I 42.5 R standartlarında yüksek mukavemetli çimento, tüm paket boyutlarında stokta.</p>
-            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img iron"></div>
-          <div class="product-info">
-            <span class="product-cat">Demir & Çelik</span>
-            <h3>İnşaat Demiri</h3>
-            <p>B420C nervürlü inşaat demiri, 8mm'den 32mm'ye tüm çaplar depreme dayanıklı üretimle.</p>
-            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
-          </div>
-        </div>
-        <div class="product-card product-card-featured">
-          <div class="featured-tag">En Çok Satan</div>
-          <div class="product-img gazbeton"></div>
-          <div class="product-info">
-            <span class="product-cat">Duvar & Blok</span>
-            <h3>Gazbeton Blok</h3>
-            <p>Hafif, ısı ve ses yalıtımlı yüksek basınçlı gazbeton. A+ enerji sınıfı binalarda tercih edilen ürün.</p>
-            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img insulation"></div>
-          <div class="product-info">
-            <span class="product-cat">Isı & Ses Yalıtımı</span>
-            <h3>EPS / XPS Plaka</h3>
-            <p>Enerji verimliliği sertifikalı EPS ve XPS yalıtım plakaları. Tüm kalınlıklar mevcuttur.</p>
-            <a href="#iletisim" class="product-link">Fiyat Öğren →</a>
-          </div>
-        </div>
+      <!-- Kategori filtre tablları -->
+      <div class="cat-tabs" id="catTabs">
+        <button class="cat-tab is-active" data-cat="hepsi">Tümü</button>
       </div>
+
+      <!-- Ürün Slider -->
+      <div class="slider-wrap">
+        <button class="slider-arrow slider-prev" id="sliderPrev" aria-label="Önceki">&#10094;</button>
+        <div class="slider-viewport">
+          <div class="slider-track" id="sliderTrack">
+          </div>
+        </div>
+        <button class="slider-arrow slider-next" id="sliderNext" aria-label="Sonraki">&#10095;</button>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
     </div>
   </section>
 
